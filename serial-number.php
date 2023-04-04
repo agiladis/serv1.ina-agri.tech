@@ -56,6 +56,7 @@
                     <div class="clearfix mb-20">
 						<div class="pull-left">
 							<a href="create-serial-number.php" class="btn btn-success btn-lg" role="button">Create New</a>
+							<!-- <a href="create-serial-number.php" class="btn btn-success btn-lg" role="button">Print All</a> -->
 						</div>
 					</div>
 					<div class="row">
@@ -119,6 +120,7 @@
 													<i class="fa fa-ellipsis-h"></i>
 												</a>
 												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="print-qr.php?print=<?= $row_serial_number['id'] ?>" target="_blank"><i class="fa fa-print"></i> Show QR</a>
 													<a class="dropdown-item" href="serial-number.php?delete=<?= $row_serial_number['id'] ?>" onclick="return confirm('Are you sure you want to delete?')"><i class="fa fa-trash"></i> Delete</a>
 												</div>
 											</div>

@@ -1,8 +1,14 @@
 <?php
 
 session_start();
+require_once("koneksi.php");
+
+// if (isset($_GET['userId'])) {
+// 	$idid = $_GET['userId'];
+
+// }
+
 if(isset($_POST['register'])){
-	require_once("koneksi.php");
 	$user=$_SESSION['user'];
 	$passold=$_POST['passold'];
 	$passnew=$_POST['passnew'];

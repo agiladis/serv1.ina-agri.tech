@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+	
+
+	<link rel="stylesheet" type="text/css" href="src/plugins/datatables/media/css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="src/plugins/datatables/media/css/dataTables.bootstrap4.css">
+	<link rel="stylesheet" type="text/css" href="src/plugins/datatables/media/css/responsive.dataTables.css">
+</head>
+<body>
+	<?php include('include/header.php'); ?>
 	<?php include('include/head.php'); ?>
 	<?php include('koneksi.php'); ?>
 	<?php
@@ -10,20 +18,19 @@
 		// HANDLE DELETE
 		if (isset($_GET['delete'])) {
 			$id = $_GET['delete'];
-
+			$query_sn = mysql_query("SELECT * FROM serial_number where id=$id");
+			$row_sn = mysql_fetch_assoc($query_sn);
 			$query_delete = mysql_query("DELETE FROM serial_number WHERE id = $id ");
 			if ($query_delete) {
 				header('Location: serial-number.php');
 			}
+			$datee = date("d-m-Y H:i:s");
+			$usernow = $_SESSION['nama'];
+			$infoo =$usernow." menghapus serial number ".$row_sn['serial_number'];
+			mysql_query("INSERT INTO log(date,note) VALUES('$datee','$infoo')");
+
 		}
 	?>
-
-	<link rel="stylesheet" type="text/css" href="src/plugins/datatables/media/css/jquery.dataTables.css">
-	<link rel="stylesheet" type="text/css" href="src/plugins/datatables/media/css/dataTables.bootstrap4.css">
-	<link rel="stylesheet" type="text/css" href="src/plugins/datatables/media/css/responsive.dataTables.css">
-</head>
-<body>
-	<?php include('include/header.php'); ?>
 	<?php include('include/sidebar.php'); ?>
 	<div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">

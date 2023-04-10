@@ -19,8 +19,7 @@
 		$sql = "UPDATE kategori_produk SET kode='$kode_produk', detail='$detail_produk' WHERE id=$id ";
 		$result = mysql_query($sql);
 		//redirect ke halaman list-kategori-produk.php jika data berhasil disimpan
-		header("Location: list-kategori-produk.php");
-		exit;
+		
 	}
 ?>
 <!DOCTYPE html>
@@ -30,6 +29,16 @@
 </head>
 <body>
 	<?php include('include/header.php'); ?>
+	<?php 
+		if (isset($_POST['submit'])) {
+			$usernow = $_SESSION['nama'];
+			$datee = date("d-m-Y H:i:s");
+
+			$infoo =$usernow." mengganti detail kategori ".$kode_produk ;
+			mysql_query("INSERT INTO log(date,note) VALUES('$datee','$infoo')");
+			header("Location: list-kategori-produk.php");
+		}
+	?>
 	<?php include('include/sidebar.php'); ?>
 	<div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">

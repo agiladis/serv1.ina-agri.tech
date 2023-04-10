@@ -4,16 +4,6 @@
 <?php 
 	$query = mysql_query("SELECT *, batch_produksi.id as 'id_batch' FROM batch_produksi LEFT JOIN pemesan on batch_produksi.id_pemesan = pemesan.id ORDER BY batch_produksi.id DESC");
 	$row_query = mysql_fetch_assoc($query);
-
-	// HANDLE DELETE 
-	if (isset($_GET['delete'])) {
-		$id = $_GET['delete'];
-		$query_delete = mysql_query("DELETE FROM batch_produksi WHERE id = $id");
-		
-		if ($query_delete) {
-			header('Location: batch-production-table.php?delete=success');
-		}
-	}
 ?>
 
 <html>
@@ -25,6 +15,23 @@
 </head>
 <body>
 	<?php include('include/header.php'); ?>
+	<?php
+	// HANDLE DELETE 
+	if (isset($_GET['delete'])) {
+		$id = $_GET['delete'];
+		$row_delete = mysql_fetch_assoc(mysql_query("SELECT * FROM batch_produksi where id=$id"));
+		$query_delete = mysql_query("DELETE FROM batch_produksi WHERE id = $id");
+		
+		if ($query_delete) {
+			$datee = date("d-m-Y H:i:s");
+			$usernow = $_SESSION['nama'];
+			$infoo =$usernow." menghapus batch produksi ".$row_delete['kode_batch'];
+			mysql_query("INSERT INTO log(date,note) VALUES('$datee','$infoo')");
+			
+			header('Location: batch-production-table.php?delete=success');
+		}
+	}
+	?>
 	<?php include('include/sidebar.php'); ?>
 	<div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">

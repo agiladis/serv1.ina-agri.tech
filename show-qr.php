@@ -3,8 +3,12 @@
 <head>
 	<?php include('include/head.php'); ?>
 	<?php include('koneksi.php'); ?>
-	
+</head>
+<body>
+	<?php include('include/header.php'); ?>
 	<?php
+	
+	$usernow = $_SESSION['nama'];
 		// GENERATE SERIAL NUMBER
 
 		$id_batch_produksi = $_POST['batch_produksi'];
@@ -25,18 +29,18 @@
 		$LCD = $_POST['LCD'];
 		$PCB = $_POST['PCB'];
 		$LOADCELL = $_POST['LOADCELL'];
+		$datee = date("d-m-Y H:i:s");
 
 		$serial_number = $kode_pemesan . "-" . $kode_kategori . "-" . $kode_batch . "-" . $kode_nomor;
 
 		$query_insert = mysql_query("INSERT INTO serial_number (id_batch, id_kategori, serial_number, LCD, PCB, LOADCELL) VALUES ('$id_batch_produksi', '$id_kategori_produk', '$serial_number', '$LCD', '$PCB', '$LOADCELL')");
+		$infoo =$usernow." menambahkan serial number baru ".$serial_number ;
+		mysql_query("INSERT INTO log(date,note) VALUES('$datee','$infoo')");
 
 		if(!$query_insert) {
 			header("Location: create-serial-number.php?generate=failed");
 		}
 	?>
-</head>
-<body>
-	<?php include('include/header.php'); ?>
 	<?php include('include/sidebar.php'); ?>
 	<div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">

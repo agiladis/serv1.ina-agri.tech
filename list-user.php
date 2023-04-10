@@ -60,9 +60,12 @@
 												<i class="fa fa-ellipsis-h"></i>
 											</a>
 											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#"><i class="fa fa-eye"></i> View</a>
-												<a class="dropdown-item" href="reset-password.php"><i class="fa fa-pencil"></i> Change Password</a>
-												<a class="dropdown-item" href="#"><i class="fa fa-trash"></i> Delete</a>
+												<?php if ($_SESSION['idid'] == $data['idid']) : ?>
+													<a class="dropdown-item" href="reset-password.php"><i class="fa fa-pencil"></i> Change Password</a>
+												<?php else : ?>
+													<a class="dropdown-item" href="reset-password.php?userId=<?php echo $data['idid'] ?>"><i class="fa fa-pencil"></i> Change Password</a>
+													<a class="dropdown-item" href="#"><i class="fa fa-trash"></i> Delete</a>
+												<?php endif ?>
 											</div>
 										</div>
 									</td>

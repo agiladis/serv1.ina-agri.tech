@@ -44,11 +44,12 @@
 							<tbody>
 									<?php
 									include "koneksi.php";
-									$query_mysql = mysql_query("SELECT * FROM log ORDER BY 'id' DESC")or die(mysql_error());
+									$no = 1;
+									$query_mysql = mysql_query("SELECT * FROM log ORDER BY id DESC")or die(mysql_error());
 									while($data = mysql_fetch_array($query_mysql)){
 									?>
 								<tr>
-									<td class="table-plus">  <?php echo $data['id']; ?>  </td>
+									<td class="table-plus"> <?php echo $no++ ?> </td>
 									<td> <?php echo $data['date']; ?> </td>
 									<td> <?php echo $data['note']; ?> </td>
 									<td>
@@ -57,7 +58,6 @@
 												<i class="fa fa-ellipsis-h"></i>
 											</a>
 											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#"><i class="fa fa-eye"></i> View</a>
 												<a class="dropdown-item" href="reset-password.php"><i class="fa fa-pencil"></i> Change Password</a>
 												<a class="dropdown-item" href="#"><i class="fa fa-trash"></i> Delete</a>
 											</div>

@@ -11,6 +11,7 @@ if($op=="in"){
     $datee = date("d-m-Y H:i:s");
     if(mysql_num_rows($sql)==1){//jika berhasil akan bernilai 1
         $qry = mysql_fetch_array($sql);
+        $_SESSION['idid'] = $qry['idid'];
         $_SESSION['user'] = $qry['user'];
         $_SESSION['nama'] = $qry['nama'];
         $_SESSION['level'] = $qry['level'];

@@ -96,19 +96,19 @@
 										<td><?php 
 
 										if ($id_lcd == 0){
-										echo "LCD : No Components</br>";
+										echo "LCD : -</br>";
 										}
 										else {
 											echo "LCD : Batch-".$row_lcd['no_batch']. "  Kardus-". $row_lcd['no_kardus'] . "  tgl (". $row_lcd['tgl_datang'].")</br>";
 										}
 										if ($id_pcb == 0){
-											echo "PCB : No Components</br>";
+											echo "PCB : -</br>";
 										}
 										else {
 											echo "PCB : Batch-".$row_pcb['no_batch']."  Kardus-".$row_pcb['no_kardus'] ."  tgl (". $row_pcb['tgl_datang'] . ")</br>";
 										}
 										if ($id_loadcell == 0){
-											echo "LOADCELL : No Components</br>";
+											echo "LOADCELL : -</br>";
 										}
 										else {
 											echo "LOADCELL : Batch-".$row_loadcell['no_batch']. "  Kardus-". $row_loadcell['no_kardus']. " tgl (". $row_loadcell['tgl_datang'].")</br>" ; 	
@@ -120,7 +120,7 @@
 													<i class="fa fa-ellipsis-h"></i>
 												</a>
 												<div class="dropdown-menu dropdown-menu-right">
-													<a class="dropdown-item" href="print-qr.php?print=<?= $row_serial_number['id'] ?>" target="_blank"><i class="fa fa-print"></i> Show QR</a>
+													<a class="dropdown-item" href="print-qr.php?print=<?= $row_serial_number['id'] ?>" target="_blank"><i class="fa fa-print"></i> Print QR</a>
 													<a class="dropdown-item" href="serial-number.php?delete=<?= $row_serial_number['id'] ?>" onclick="return confirm('Are you sure you want to delete?')"><i class="fa fa-trash"></i> Delete</a>
 												</div>
 											</div>

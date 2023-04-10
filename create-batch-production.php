@@ -11,7 +11,7 @@
 			$tgl_akhir = $_POST['tgl_akhir'];
 
 			$query_create = mysql_query("INSERT INTO batch_produksi (id_pemesan, kode_batch, tgl_mulai, tgl_akhir) VALUES ('$id_pemesan', '$kode_batch', '$tgl_mulai', '$tgl_akhir')");
-
+			
 			if ($query_create) {
 				header("Location: batch-production-table.php?create=success");
 			} else {
@@ -32,6 +32,16 @@
 </head>
 <body>
 	<?php include('include/header.php'); ?>
+	<?php 
+		if (isset($_POST['create'])) {
+			$usernow = $_SESSION['nama'];
+			$datee = date("d-m-Y H:i:s");
+
+			$infoo =$usernow." menambahkan batch baru dengan code ".$kode_batch ;
+			mysql_query("INSERT INTO log(date,note) VALUES('$datee','$infoo')");
+		}
+	?>
+	
 	<?php include('include/sidebar.php'); ?>
 	<div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">

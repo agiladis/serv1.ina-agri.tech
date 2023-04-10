@@ -21,7 +21,7 @@
 </head>
 <body>
     <div style="text-align:center;">
-        <h4>Serial Number and QR Code:</h4>   
+        <h4>QR Code:</h4>   
         <div id="qrcode"></div>
     </div>
 

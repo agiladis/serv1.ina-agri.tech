@@ -12,7 +12,6 @@
 
 		//redirect ke halaman list-kategori-produk.php jika data berhasil disimpan
 		header("Location: list-pemesan-produk.php");
-		exit;
 }
 
 ?>
@@ -24,6 +23,16 @@
 </head>
 <body>
 	<?php include('include/header.php'); ?>
+	<?php 
+		if (isset($_POST['submit'])) {
+			$usernow = $_SESSION['nama'];
+			$datee = date("d-m-Y H:i:s");
+
+			$infoo =$usernow." menambahkan pemesan baru dengan code ".$kode ;
+			mysql_query("INSERT INTO log(date,note) VALUES('$datee','$infoo')");
+		}
+	?>
+	
 	<?php include('include/sidebar.php'); ?>
 	<div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">

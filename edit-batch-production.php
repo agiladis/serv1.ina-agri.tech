@@ -31,6 +31,15 @@
 </head>
 <body>
 	<?php include('include/header.php'); ?>
+	<?php 
+		if (isset($_POST['update'])) {
+			$usernow = $_SESSION['nama'];
+			$datee = date("d-m-Y H:i:s");
+
+			$infoo =$usernow." mengganti detail pada batch code ".$kode_batch ;
+			mysql_query("INSERT INTO log(date,note) VALUES('$datee','$infoo')");
+		}
+	?>
 	<?php include('include/sidebar.php'); ?>
 	<div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">
@@ -75,7 +84,7 @@
 						<div class="form-group row">
 							<label class="col-sm-12 col-md-2 col-form-label">Batch Code</label>
 							<div class="col-sm-12 col-md-10">
-								<input class="form-control" name="kode_batch" placeholder="Code" type="number" value="<?= $row_edit['kode_batch'] ?>">
+								<input class="form-control" name="kode_batch" placeholder="Code" type="number" value="<?= $row_edit['kode_batch'] ?>" readonly>
 							</div>
 						</div>
 						<div class="form-group row">

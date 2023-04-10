@@ -4,17 +4,7 @@
 	$query = "SELECT * FROM kategori_produk ";
 	$result = mysql_query($query);
 	$row = mysql_fetch_assoc($result);
-	if (isset($_GET['delete'])) {
-		$id = $_GET['delete'];
-		$query = "DELETE FROM kategori_produk WHERE id = '$id'";
-		$result = mysql_query($query);
-
-		if($result) {
-			// Jika berhasil, redirect ke halaman list kategori produk
-			header('Location: list-kategori-produk.php');
-			exit;
-		}
-	}
+	
 ?>
 
 <!DOCTYPE html>
@@ -27,6 +17,24 @@
 </head>
 <body>
 	<?php include('include/header.php'); ?>
+	<?php
+	if (isset($_GET['delete'])) {
+		$id = $_GET['delete'];
+		$row_delete = mysql_fetch_assoc(mysql_query("SELECT * FROM kategori_produk where id=$id"));
+		$query = "DELETE FROM kategori_produk WHERE id = '$id'";
+		$result = mysql_query($query);
+
+		if($result) {
+			$datee = date("d-m-Y H:i:s");
+			$usernow = $_SESSION['nama'];
+			$infoo =$usernow." menghapus kategori produk ".$row_delete['kode'];
+			mysql_query("INSERT INTO log(date,note) VALUES('$datee','$infoo')");
+			// Jika berhasil, redirect ke halaman list kategori produk
+			header('Location: list-kategori-produk.php');
+			exit;
+		}
+	}
+	?>
 	<?php include('include/sidebar.php'); ?>
 	<div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">

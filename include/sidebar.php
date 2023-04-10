@@ -64,7 +64,7 @@
 								</a>
 							</li>
 							<li class="dropdown">
-								<a href="reset-password.php" class="dropdown-toggle no-arrow">
+								<a href="reset-password.php?userId=<?= $_SESSION['idid'] ?>" class="dropdown-toggle no-arrow">
 									<span class="fa fa-edit"></span><span class="mtext">Change Password</span>
 								</a>
 							</li>

@@ -1,14 +1,27 @@
 <?php
+    session_start();
     include('koneksi.php');
-
     if (isset($_GET['print'])) {
+        $usernow = $_SESSION['nama'];
+		$datee = date("d-m-Y H:i:s");
 		$id = $_GET['print'];
 		$query = "SELECT * FROM serial_number WHERE id = $id";
 		$result = mysql_query($query);
 		$row = mysql_fetch_assoc($result);
         $serial = $row['serial_number'];
+        
+		$infoo =$usernow." melakukan print serial number ".$serial ;
+		mysql_query("INSERT INTO log(date,note) VALUES('$datee','$infoo')");
 	}
 
+    elseif (isset($_GET['sn'])) {
+        $usernow = $_SESSION['nama'];
+		$datee = date("d-m-Y H:i:s");
+		$serial = $_GET['sn'];
+
+        $infoo =$usernow." melakukan print serial number ".$serial ;
+		mysql_query("INSERT INTO log(date,note) VALUES('$datee','$infoo')");
+    }
     
 ?>
 <!DOCTYPE html>

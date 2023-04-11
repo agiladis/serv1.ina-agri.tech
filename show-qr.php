@@ -99,6 +99,8 @@
                 fontcolor: '#000',
             });
 		});
+
+		window.open('print-qr.php?sn='+text,'_blank');
 	</script>
 </body>
 </html>

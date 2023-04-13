@@ -39,10 +39,17 @@ if(isset($_POST['sdelete'])){
 	require_once("koneksi.php");
 	$sdelete = $_POST['sdelete'];
 	mysql_query("DELETE FROM perangkat WHERE id=$sdelete");
-	
-
 }
-
+elseif(isset($_POST['good'])){
+	require_once("koneksi.php");
+	$id_good = $_POST['good'];
+	mysql_query("UPDATE perangkat SET kondisi = 'Good' WHERE id ='$id_good'");
+}
+elseif(isset($_POST['bad'])){
+	require_once("koneksi.php");
+	$id_bad = $_POST['bad'];
+	mysql_query("UPDATE perangkat SET kondisi = 'Bad' WHERE id ='$id_bad'");
+}
 ?>
 
 
@@ -151,7 +158,7 @@ if(isset($_POST['sdelete'])){
 									<th>No. Batch</th>
 									<th>No. Kardus</th>
 									<th>Tangal Incoming</th>
-
+									<th>Quality Control</th>
                                     <th>Aksi</th>
                                     <th class="datatable-nosort"></th>
 								</tr>
@@ -162,7 +169,12 @@ if(isset($_POST['sdelete'])){
 									$query_mysql = mysql_query("SELECT * FROM perangkat")or die(mysql_error());
 									$numb=1;
 									while($data = mysql_fetch_array($query_mysql)){
-									
+										$status = '';
+										if ($data['kondisi'] == 'Bad') {
+											$status = '<i class="fa fa-times" style="color:red"></i>'; // tanda silang merah
+										} else if ($data['kondisi'] == 'Good') {
+												$status = '<i class="fa fa-check" style="color:green"></i>'; // tanda centang hijau
+										}
 								?>
 
 								<tr>
@@ -172,15 +184,17 @@ if(isset($_POST['sdelete'])){
 									<td> Batch-No.<?php echo $data['no_batch']; ?></td>
 									<td> Box-No.<?php echo $data['no_kardus']; ?></td>
 									<td> <?php echo $data['tgl_datang']; ?></td>
+									<td> <?php echo $status
+    									?></td>
 									<td>
 										<div class="dropdown">
 											<a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
 												<i class="fa fa-ellipsis-h"></i>
 											</a>
 											<div class="dropdown-menu dropdown-menu-right">
-												<!-- <a class="dropdown-item" href="#"><i class="fa fa-eye"></i> View</a>
-												<a class="dropdown-item" href="reset-password.php"><i class="fa fa-pencil"></i> Change Password</a> -->
-											<form method="POST">	
+											<form method="POST">
+												<button class="dropdown-item" name="good" value="<?php echo $data['id']; ?>" type="submit" ><i class="fa fa-check" style="color:green"></i> Good</a>
+												<button class="dropdown-item" name="bad" value="<?php echo $data['id']; ?>" type="submit" ><i class="fa fa-times" style="color:red"></i> Bad</a>
 												<button onclick="return confirm('Are you sure you want to delete this item?');" class="dropdown-item" name="sdelete" value="<?php echo $data['id']; ?>" type="submit" ><i class="fa fa-trash"></i> Delete</a>
 											</form>
 											</div>
@@ -251,6 +265,8 @@ if(isset($_POST['sdelete'])){
 			});
 			
 		});
+
+		
 	</script>
 </body>
 </html>

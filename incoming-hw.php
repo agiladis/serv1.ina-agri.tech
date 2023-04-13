@@ -41,14 +41,16 @@ if(isset($_POST['sdelete'])){
 	mysql_query("DELETE FROM perangkat WHERE id=$sdelete");
 }
 elseif(isset($_POST['good'])){
+	$penanggung_jawab = $_SESSION['nama'];
 	require_once("koneksi.php");
 	$id_good = $_POST['good'];
-	mysql_query("UPDATE perangkat SET kondisi = 'Good' WHERE id ='$id_good'");
+	mysql_query("UPDATE perangkat SET kondisi = 'Good', penanggung_jawab = '$penanggung_jawab' WHERE id ='$id_good'");
 }
 elseif(isset($_POST['bad'])){
+	$penanggung_jawab = $_SESSION['nama'];
 	require_once("koneksi.php");
 	$id_bad = $_POST['bad'];
-	mysql_query("UPDATE perangkat SET kondisi = 'Bad' WHERE id ='$id_bad'");
+	mysql_query("UPDATE perangkat SET kondisi = 'Bad', penanggung_jawab = '$penanggung_jawab' WHERE id ='$id_bad'");
 }
 ?>
 
@@ -148,7 +150,7 @@ elseif(isset($_POST['bad'])){
 
 				<!-- Simple Datatable start -->
 				<div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
-					<div class="row overflow-auto invoice-wrap">
+					<div class="row invoice-wrap">
 						<table class='data-table stripe hover nowrap'>
 						<thead>
 								<tr>
@@ -184,8 +186,12 @@ elseif(isset($_POST['bad'])){
 									<td> Batch-No.<?php echo $data['no_batch']; ?></td>
 									<td> Box-No.<?php echo $data['no_kardus']; ?></td>
 									<td> <?php echo $data['tgl_datang']; ?></td>
-									<td> <?php echo $status
-    									?></td>
+									<td class="text-center"> 
+										<?php if ($status != null)
+											echo $status . "(" . $data['penanggung_jawab'] . ")";
+										?>
+
+									</td>
 									<td>
 										<div class="dropdown">
 											<a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">

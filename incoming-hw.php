@@ -141,7 +141,7 @@ if(isset($_POST['sdelete'])){
 
 				<!-- Simple Datatable start -->
 				<div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
-					<div class="row">
+					<div class="row overflow-auto invoice-wrap">
 						<table class='data-table stripe hover nowrap'>
 						<thead>
 								<tr>
